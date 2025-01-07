@@ -1,0 +1,19 @@
+<h1>Bem-vindo à Homepage!</h1>
+
+<% if @user %>
+  <p>Olá, <%= @user.name %>! Você está logado como <%= @user.user_type %>.</p>
+  <div id="movies">
+  <% @user.movies.each do |movie| %>
+    <%= render movie %>
+    <p>
+      <%= link_to "Show this movie", movie %>
+    </p>
+  <% end %>
+</div>
+<% else %>
+  <p>Usuário não identificado.</p>
+<% end %>
+
+<%= link_to "Logout", root_path, method: :delete, data: { confirm: "Deseja sair?" } %>
+
+<%= link_to "Create movie", new_movie_path %>

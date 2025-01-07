@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+
+  <% if flash[:alert] %>
+    <p style="color: red;"><%= flash[:alert] %></p>
+  <% end %>
+
+  <%= form_with url: authenticate_path, method: :post do |form| %>
+    <div>
+      <%= form.label :name, "Nome de Usuário" %>
+      <%= form.text_field :name, required: true %>
+    </div>
+    <div>
+      <%= form.label :password, "Senha" %>
+      <%= form.password_field :password, required: true %>
+    </div>
+    <div>
+      <%= form.submit "Entrar" %>
+    </div>
+  <% end %>
+</body>
+</html>
