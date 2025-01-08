@@ -22,19 +22,28 @@ class MoviesController < ApplicationController
 
   # POST /movies or /movies.json
   def create
-    @movie = Movie.new(movie_params)
-    @movie.user_id = session[:user_id] # Associa o filme ao usuário logado
+    # Permite um array de filmes
+    movie_params = params.permit(movies: [:name, :release_date, :rating, :description])
 
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: "Movie was successfully created." }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    # Cria uma lista de instâncias de Movie a partir dos parâmetros
+    movies = movie_params[:movies].map do |movie_param|
+      movie = Movie.new(movie_param)
+      movie.user_id = session[:user_id] # Associa o filme ao usuário logado
+      movie
+    end
+
+    # Tenta salvar todos os filmes
+    if movies.all?(&:save)
+      redirect_to home_homepage_path, notice: 'Movies were successfully created.'
+    else
+      # Se algum filme falhar na validação, re-renderiza a página
+      @movie = movies.first # Pega o primeiro filme para exibir erros, se necessário
+      render :new, status: :unprocessable_entity
     end
   end
+
+
+
 
   # PATCH/PUT /movies/1 or /movies/1.json
   def update
