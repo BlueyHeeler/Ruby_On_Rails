@@ -23,6 +23,10 @@
   </head>
 
   <body>
+    <% unless controller_name == 'home' && ( action_name == 'login' || action_name == 'loginError' )%>
+      <!-- Inclui o cabeçalho apenas se não for a tela de login -->
+      <%= render 'layouts/header' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
