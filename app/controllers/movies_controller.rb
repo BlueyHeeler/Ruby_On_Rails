@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/new
   def new
+    @user = User.find(session[:user_id]) if session[:user_id]
     @movie = Movie.new
   end
 
@@ -22,6 +23,7 @@ class MoviesController < ApplicationController
   # POST /movies or /movies.json
   def create
     @movie = Movie.new(movie_params)
+    @movie.user_id = session[:user_id] # Associa o filme ao usuário logado
 
     respond_to do |format|
       if @movie.save
