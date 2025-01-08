@@ -23,6 +23,10 @@
 
       <%= form.label :description, style: "display: block" %>
       <%= form.textarea :description, name: "movies[][description]" %>
+
+      <%= form.label :poster_image, "Upload Poster Image" %>
+      <%= form.file_field :poster_image %>
+
     </div>
   </div>
 

@@ -21,6 +21,9 @@ class HomeController < ApplicationController
     end
 
     def homepage
-        @user = User.find(session[:user_id]) if session[:user_id]
+        @user = User.find_by(id: session[:user_id]) # Verifica se há um usuário logado
+        if @user
+            @movies = @user.movies.includes(:poster_image_attachment) # Inclui Active Storage para evitar consultas extras
+        end
     end
 end

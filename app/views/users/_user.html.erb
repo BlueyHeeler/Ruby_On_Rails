@@ -10,8 +10,14 @@
   </p>
 
   <p>
-    <strong>User type:</strong>
-    <%= user.user_type %>
+    <strong>Type:</strong>
+    <%= @user.user_type %>
   </p>
+
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, style: "width: 100px; height: 100px; border-radius: 50%;" %>
+  <% else %>
+    <p>No avatar uploaded</p>
+  <% end %>
 
 </div>

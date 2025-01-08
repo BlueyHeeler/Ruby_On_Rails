@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
   belongs_to :user
+  has_one_attached :poster_image # O nome `poster_image` pode ser qualquer nome que você escolher
 
   validates :name, presence: true
   validates :release_date, presence: true

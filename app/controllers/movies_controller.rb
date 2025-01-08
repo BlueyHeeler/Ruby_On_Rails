@@ -8,6 +8,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
+    @movie = Movie.find(params[:id])
   end
 
   # GET /movies/new
@@ -76,6 +77,6 @@ class MoviesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def movie_params
-    params.expect(movie: [ :name, :release_date, :rating, :description, :user_id ])
+    params.expect(movie: [ :name, :release_date, :rating, :description, :user_id, :poster_image])
   end
 end

@@ -20,8 +20,11 @@
   </p>
 
   <p>
-    <strong>User:</strong>
-    <%= movie.user_id %>
+  <% if movie.poster_image.attached? %>
+    <%= image_tag movie.poster_image,  style: "width: 150px; height: auto;" %>
+  <% else %>
+    <p>No poster image available</p>
+  <% end %>
   </p>
 
 </div>
