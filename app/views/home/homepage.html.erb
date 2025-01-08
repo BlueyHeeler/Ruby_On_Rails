@@ -2,6 +2,7 @@
 
 <% if @user %>
   <p>Olá, <%= @user.name %>! Você está logado como <%= @user.user_type %>.</p>
+  <%= image_tag 'hilda6.png', alt: '', style: 'width: 150px; height: 150px;' %>
   <div id="movies">
   <% @user.movies.each do |movie| %>
     <%= render movie %>

@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!, only: [:homepage]
     def login
-        # Aqui você pode inicializar variáveis, se necessário
+    end
+
+    def loginError
     end
 
     def authenticate
@@ -14,7 +16,7 @@ class HomeController < ApplicationController
         else
             # Credenciais inválidas
             flash.now[:alert] = "Nome ou senha inválidos. Tente novamente."
-            render :login
+            redirect_to home_loginError_path
         end
     end
 
