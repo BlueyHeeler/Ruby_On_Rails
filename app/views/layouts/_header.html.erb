@@ -4,9 +4,7 @@
     <ul>
       <li><%= link_to "Home", home_homepage_path %></li>
       <li><%= link_to "New Movie", new_movie_path %></li>
-      <% if @user %>
-        <li><%= link_to "Perfil", user_path(@user) %></li>
-      <% end %>
+      <li><%= link_to "Perfil", user_path(@user) %></li>
       <li><%= link_to "Logout", root_path %></li>
     </ul>
   </nav>

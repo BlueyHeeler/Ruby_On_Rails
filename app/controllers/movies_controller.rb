@@ -8,23 +8,25 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
+    @user = User.find_by(id: session[:user_id]) # Verifica se há um usuário logado
     @movie = Movie.find(params[:id])
   end
 
   # GET /movies/new
   def new
-    @user = User.find(session[:user_id]) if session[:user_id]
+    @user = User.find_by(id: session[:user_id])
     @movie = Movie.new
   end
 
   # GET /movies/1/edit
   def edit
+    @user = User.find_by(id: session[:user_id]) # Verifica se há um usuário logado
   end
 
   # POST /movies or /movies.json
   def create
     # Permite um array de filmes
-    movie_params = params.permit(movies: [:name, :release_date, :rating, :description])
+    movie_params = params.permit(movies: [:name, :release_date, :rating, :description, :poster_image])
 
     # Cria uma lista de instâncias de Movie a partir dos parâmetros
     movies = movie_params[:movies].map do |movie_param|
@@ -42,8 +44,6 @@ class MoviesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-
 
 
   # PATCH/PUT /movies/1 or /movies/1.json
