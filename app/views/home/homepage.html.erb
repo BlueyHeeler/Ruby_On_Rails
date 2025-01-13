@@ -2,15 +2,37 @@
 
 <% if @user %>
   <p>Olá, <%= @user.name %>! Você está logado como <%= @user.user_type %>.</p>
-  <%= image_tag 'hilda6.png', alt: '', style: 'width: 150px; height: 150px;' %>
+  <%= render partial: 'home/carousel', locals: { movies: @user&.movies } %>
+  <br>
+  <br>
+  <br>
   <div id="movies">
-  <% @user.movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
-</div>
+  <% if @user.movies.any? %>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Rating</th>
+        <th scope="col">About></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.movies.each do |movie| %>
+        <tr>
+          <td><%= movie.name %></td>
+          <td><%= movie.release_date.strftime('%d/%m/%Y') if movie.release_date %></td>
+          <td><%= movie.rating || 'N/A' %></td>
+          <td><%= link_to "Show this movie", movie %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Você ainda não possui filmes associados.</p>
+<% end %>
+  </div>
 <% else %>
   <p>Usuário não identificado.</p>
 <% end %>
+
