@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const addMovieBtn = document.getElementById("add-movie-btn");
     const moviesContainer = document.getElementById("movies-container");
 
